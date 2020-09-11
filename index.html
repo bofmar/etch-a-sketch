@@ -10,7 +10,18 @@
     <body>
         <header>Etch-A-Sketch</header>
         <div class="container">
-            <ul class="controls-area areas"></ul>
+            <ul class="controls-area areas">
+                <li><button type="button" id ="clear">Clear Board</button></li>
+                <li>
+                    <input type="number" max="100" id="grid-number-picker">
+                    <button type="button" id="grid-number-button">Generate new grid</button>
+                </li>
+                <li>Pick Color</li>
+                <li><button type="button" id="random">Random Colors</button></li>
+                <li><button type="button" id ="eraser">Eraser</button></li>
+                <li><button type="button" id="toggle-grid">Toggle Grid</button></li>
+                <li><button type="button" id="toggle-instructions">Toggle Instructions</button></li>
+            </ul>
             <div class="canvas-area areas"></div>
             <div class="instructions-area areas"></div>
         </div>

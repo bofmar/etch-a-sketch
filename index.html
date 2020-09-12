@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="styles/style.css">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet"> 
         <meta charset="UTF-8">
+        <script src="https://kit.fontawesome.com/1b7d9075d2.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <header>Etch-A-Sketch</header>
@@ -13,12 +14,15 @@
             <ul class="controls-area areas">
                 <li><button type="button" id ="clear">Clear Board</button></li>
                 <li>
-                    <input type="number" max="100" id="grid-number-picker">
+                    <input type="number" value="16" max="100" min="1" id="grid-number-picker">
                     <button type="button" id="grid-number-button">Generate new grid</button>
                 </li>
-                <li>Pick Color</li>
+                <li>
+                    <input type="color" id="pick-color" name="pick-color" value="#000000">
+                    <label for="pick-color">Select a color:</label>
+                </li>
                 <li><button type="button" id="random">Random Colors</button></li>
-                <li><button type="button" id ="eraser">Eraser</button></li>
+                <li><button type="button" id ="eraser"><i class="fas fa-eraser"></i></button></li>
                 <li><button type="button" id="toggle-grid">Toggle Grid</button></li>
                 <li><button type="button" id="toggle-instructions">Toggle Instructions</button></li>
             </ul>

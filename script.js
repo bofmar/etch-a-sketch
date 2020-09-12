@@ -1,40 +1,135 @@
 const canvas = document.querySelector(".canvas-area");
 const body = document.querySelector("body");
+
 let canChangeColor = false;
+let colorIsRandom = false;
+let paintColor = "black";
+let gridSize = 16;
 
 createGrid();
 
-let gridSquares = document.querySelectorAll(".canvas-item");
-gridSquares.forEach(gridSquare => gridSquare.addEventListener("mousedown", ()=>{
-    canChangeColor = true;
-})); //checks if the user has his mouse click down and enables coloring
+//clear button
+let clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", createGrid);
 
-body.addEventListener("mouseup",()=>{
-    canChangeColor = false;
-}); //disable coloring if the user lifts his mouse up anywhere in the body
+//eraser button
+let eraser = document.querySelector("#eraser");
+eraser.addEventListener("click", ()=>{
+    paintColor = "white";
+});
 
-gridSquares.forEach(gridSquare => gridSquare.addEventListener("mouseover", changeColor));
+//toggle grid
+let toggleGridButton = document.querySelector("#toggle-grid");
+toggleGridButton.addEventListener("click", toggleGrid);
 
-//when user clicks on a cell, always color that cell
-gridSquares.forEach(gridSquare => gridSquare.addEventListener("click", clickChangeColor)); 
+//pick color
+let pickColorButton = document.querySelector("#pick-color");
+pickColorButton.value = paintColor;
+pickColorButton.addEventListener("input", (e)=>{
+    paintColor = e.target.value;
+},false);
 
+//random colors
+let randomButton = document.querySelector("#random");
+randomButton.addEventListener("click", () =>{
+    if(colorIsRandom){
+        colorIsRandom = false;
+        paintColor = pickColorButton.value;
+    }
+    else{
+        colorIsRandom = true;
+    }
+});
 
-function createGrid(){
-    canvas.style.setProperty("--grid-size", 16);
-    let totalDivs = Math.pow(16,2);
-    for(let i = 0; i < totalDivs; i++){
+//toggle instructions
+
+//generate new grid
+let gridSizeInput = document.querySelector("#grid-number-picker");
+gridSizeInput.value = gridSize;
+let gridSizeButton = document.querySelector("#grid-number-button");
+gridSizeButton.addEventListener("click", ()=>{
+    gridSize = gridSizeInput.value;
+    if(gridSize > 100){
+        gridSize = 100;
+    }
+    if(gridSize < 1){
+        gridSize = 1;
+    }
+    createGrid();
+    gridSizeInput.value = gridSize;
+});
+
+function createGrid() {
+    canvas.style.setProperty("--grid-size", gridSize);
+    canvas.textContent = "";
+    let totalDivs = Math.pow(gridSize, 2);
+    for (let i = 0; i < totalDivs; i++) {
         let newDiv = document.createElement("div");
         newDiv.classList.add("canvas-item");
         canvas.appendChild(newDiv);
     }
+    activateCellsFunctionality();
 }
 
-function changeColor(e){
-    if(canChangeColor){
-        e.target.style.backgroundColor = "black";
+function activateCellsFunctionality() {
+    let gridSquares = document.querySelectorAll(".canvas-item");
+    gridSquares.forEach(gridSquare => gridSquare.addEventListener("mousedown", () => {
+        canChangeColor = true;
+    })); //checks if the user has his mouse click down and enables coloring
+
+    body.addEventListener("mouseup", () => {
+        canChangeColor = false;
+    }); //disable coloring if the user lifts his mouse up anywhere in the body
+
+    gridSquares.forEach(gridSquare => gridSquare.addEventListener("mouseover", changeColor));
+
+    //when user clicks on a cell, always color that cell
+    gridSquares.forEach(gridSquare => gridSquare.addEventListener("click", clickChangeColor));
+}
+
+function changeColor(e) {
+    if(colorIsRandom){
+        paintColor = getRandomHex();
+    }
+    if (canChangeColor) {
+        e.target.style.backgroundColor = paintColor;
     }
 }
 
-function clickChangeColor(e){
-    e.target.style.backgroundColor = "black";
+function clickChangeColor(e) {
+    if(colorIsRandom){
+        paintColor = getRandomHex();
+    }
+    e.target.style.backgroundColor = paintColor;
+}
+
+function toggleGrid(){
+    let squares = document.querySelectorAll(".canvas-item");
+    squares.forEach(square => {
+        square.classList.toggle("canvas-item-no-border");
+    })
+}
+
+function getRandomHex(){
+    let hexString = "#";
+    for(let i = 0; i < 3; i++){
+        //get random number from 0 to 255
+        let randomDecimal = getRandomInt(256);
+        //convert from decimal to hex
+        hexString += Number(randomDecimal).toString(16);
+    }
+    return hexString;
+}
+
+function getRandomInt(max, min){
+    if(typeof min === "undefined"){
+        //return a random number between 0(inclusive) and max(exclusive)
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+    else{
+        //Return a random integer between min(inclusive) and max(exclusive)
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+    }   
 }

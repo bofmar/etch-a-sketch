@@ -42,6 +42,8 @@ randomButton.addEventListener("click", () =>{
 });
 
 //toggle instructions
+let instructionToggle = document.querySelector("#toggle-instructions");
+instructionToggle.addEventListener("click", toggleInstructions)
 
 //generate new grid
 let gridSizeInput = document.querySelector("#grid-number-picker");
@@ -103,11 +105,12 @@ function clickChangeColor(e) {
     e.target.style.backgroundColor = paintColor;
 }
 
-function toggleGrid(){
+function toggleGrid(e){
     let squares = document.querySelectorAll(".canvas-item");
     squares.forEach(square => {
         square.classList.toggle("canvas-item-no-border");
     })
+    e.target.classList.toggle("grid-off");
 }
 
 function getRandomHex(){
@@ -132,4 +135,10 @@ function getRandomInt(max, min){
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min);
     }   
+}
+
+function toggleInstructions(){
+    let instructionArea = document.querySelector("#instructions");
+    instructionArea.classList.toggle("instructions-area-off");
+    instructionArea.classList.toggle("instructions-area-on");
 }

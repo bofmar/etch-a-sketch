@@ -13,21 +13,32 @@
         <div class="container">
             <ul class="controls-area areas">
                 <li><button type="button" id ="clear">Clear Board</button></li>
-                <li>
+                <li id="grid-pick-container">
                     <input type="number" value="16" max="100" min="1" id="grid-number-picker">
                     <button type="button" id="grid-number-button">Generate new grid</button>
                 </li>
-                <li>
-                    <input type="color" id="pick-color" name="pick-color" value="#000000">
-                    <label for="pick-color">Select a color:</label>
+                <li id="color-container">
+                    <input type="color" id="pick-color" class="no-button" name="pick-color" value="#000000">
+                    <label for="pick-color">Select a color</label>
                 </li>
-                <li><button type="button" id="random">Random Colors</button></li>
-                <li><button type="button" id ="eraser"><i class="fas fa-eraser"></i></button></li>
-                <li><button type="button" id="toggle-grid">Toggle Grid</button></li>
-                <li><button type="button" id="toggle-instructions">Toggle Instructions</button></li>
+                <li id="random-container">
+                    <button type="button" id="random" class="no-button"></button>
+                    <label for="random">Go wild</label>
+                </li>
+                <li><button type="button" id ="eraser" class="no-button"><i class="fas fa-eraser"></i></button></li>
+                <li><button type="button" id="toggle-grid" class="no-button"><i class="fas fa-border-all"></i></button></li>
+                <li><button type="button" id="toggle-instructions">Instructions</button></li>
             </ul>
             <div class="canvas-area areas"></div>
-            <div class="instructions-area areas"></div>
+            <div id="instructions" class="instructions-area-off">
+                <h1>Instructions</h1>
+                <ul>
+                    <li>Create your grid by putting a number between 2 and 100 and pressing "Generate new grid"</li>
+                    <li>Choose a custom color by clicking on the color picker box or let the program generate random colors for each square</li>
+                    <li>Erase any mistakes with the eraser and toggle the grid on or off with the grid button</li>
+                </ul>
+                <h2>Have Fun!</h2>
+            </div>
         </div>
         <script type="text/javascript" src="script.js"></script>
     </body>

@@ -195,3 +195,7 @@ button:hover, .no-button:hover{
 #instructions li{
     padding: 10px;
 }
+
+.activated{
+    box-shadow: 0 0 20px gold;
+}

@@ -31,13 +31,15 @@ pickColorButton.addEventListener("input", (e)=>{
 
 //random colors
 let randomButton = document.querySelector("#random");
-randomButton.addEventListener("click", () =>{
+randomButton.addEventListener("click", (e) =>{
     if(colorIsRandom){
         colorIsRandom = false;
         paintColor = pickColorButton.value;
+        e.target.classList.toggle("activated");
     }
     else{
         colorIsRandom = true;
+        e.target.classList.toggle("activated");
     }
 });
 

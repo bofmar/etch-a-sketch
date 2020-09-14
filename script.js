@@ -61,6 +61,11 @@ gridSizeButton.addEventListener("click", ()=>{
     gridSizeInput.value = gridSize;
 });
 
+//prevent the user from dragging the grid around
+document.querySelector('body').addEventListener('mousedown', function(e) {
+    e.preventDefault();
+});
+
 function createGrid() {
     canvas.style.setProperty("--grid-size", gridSize);
     canvas.textContent = "";

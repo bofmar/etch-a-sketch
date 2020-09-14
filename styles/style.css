@@ -166,6 +166,7 @@ button:hover, .no-button:hover{
     width: 15%;
     transition: all 500ms ease-in-out;
     transform-origin: top left;
+    cursor: default;
 }
 
 .instructions-area-on{

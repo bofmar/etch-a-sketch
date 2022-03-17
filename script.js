@@ -63,9 +63,11 @@ gridSizeButton.addEventListener("click", ()=>{
     gridSizeInput.value = gridSize;
 });
 
-//prevent the user from dragging the grid around
+//disables default behavior of clicks for everything except the number input
+//this prevents the user from dragging around the grid and highlighting the invisible
+//instructions.
 document.querySelector('body').addEventListener('mousedown', function(e) {
-    e.preventDefault();
+    e.target.id !== "grid-number-picker" ? e.preventDefault() : true;
 });
 
 function createGrid() {
